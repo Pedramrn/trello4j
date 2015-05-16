@@ -26,14 +26,7 @@ import org.trello4j.model.Member;
 /**
  * @author Johan Mynhardt
  */
-public class CardServiceTest {
-
-	// Note: this url was used to generate token with read, write permissions:
-	// https://trello.com/1/authorize?key=23ec668887f03d4c71c7f74fb0ae30a4&name=My+Application&expiration=never&response_type=token&scope=read,write
-
-	private static final String API_KEY = "23ec668887f03d4c71c7f74fb0ae30a4";
-	private static final String API_TOKEN = "cfb1df98cbde193b3181e02a8bca9871eaeb8aed0659391f887631055b0b774d";
-	private static final String LIST_ID = "TODO";
+public class CardServiceTest extends TrelloApiTest {
 
 	@Test
 	public void testCreateCard() {
@@ -46,7 +39,7 @@ public class CardServiceTest {
 		map.put("desc", description);
 
 		// WHEN
-		Card card = new TrelloTemplate(API_KEY, API_TOKEN).boundListOperations(listId).createCard(name, description, null, null, null, null, null, null);
+		Card card = getTrelloTemplate().boundListOperations(listId).createCard(name, description, null, null, null, null, null, null);
 
 		// THEN
 		assertNotNull(card);
@@ -61,7 +54,7 @@ public class CardServiceTest {
 		String commentText = "Comment text from JUnit test.";
 
 		// WHEN
-		Action action = new TrelloTemplate(API_KEY, API_TOKEN).boundCardOperations(cardId).comment(commentText);
+		Action action = getTrelloTemplate().boundCardOperations(cardId).comment(commentText);
 
 		// THEN
 		assertNotNull(action);
@@ -91,7 +84,7 @@ public class CardServiceTest {
 		String fileName = file.getName();
 
 		// WHEN
-		List<Card.Attachment> attachments = new TrelloTemplate(API_KEY, API_TOKEN).boundCardOperations(cardId).attach(file, null, null, null);
+		List<Card.Attachment> attachments = getTrelloTemplate().boundCardOperations(cardId).attach(file, null, null, null);
 		file.deleteOnExit();
 
 		// THEN
@@ -109,7 +102,7 @@ public class CardServiceTest {
 		URL url = new URL("https://trello.com/images/reco/Taco_idle.png");
 
 		// WHEN
-		List<Card.Attachment> attachments = new TrelloTemplate(API_KEY, API_TOKEN).boundCardOperations(cardId).attach(null, url, "Taco", null);
+		List<Card.Attachment> attachments = getTrelloTemplate().boundCardOperations(cardId).attach(null, url, "Taco", null);
 
 		// THEN
 		assertNotNull(attachments);
@@ -126,7 +119,7 @@ public class CardServiceTest {
 		String cardId = "50429779e215b4e45d7aef24";
 
 		// WHEN
-		Checklist checklist = new TrelloTemplate(API_KEY, API_TOKEN).boundCardOperations(cardId).addChecklist(null, null, null);
+		Checklist checklist = getTrelloTemplate().boundCardOperations(cardId).addChecklist(null, null, null);
 
 		// THEN
 		assertNotNull(checklist);
@@ -142,7 +135,7 @@ public class CardServiceTest {
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// WHEN
 		trello.boundCardOperations(cardId).deleteLabel("blue");
@@ -158,7 +151,7 @@ public class CardServiceTest {
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
 
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 		Member boardUser = trello.boundMemberOperations("userj").get();
 
 		// PREPARE CARD
@@ -181,7 +174,7 @@ public class CardServiceTest {
 
 	@Test
 	public void addMemberVote() throws IOException {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
@@ -196,7 +189,7 @@ public class CardServiceTest {
 			}
 		}
 		// WHEN
-		boolean voted = new TrelloTemplate(API_KEY, API_TOKEN).boundCardOperations(cardId).vote(boardUser.getId());
+		boolean voted = getTrelloTemplate().boundCardOperations(cardId).vote(boardUser.getId());
 
 		// THEN
 		assertTrue(voted);
@@ -204,9 +197,9 @@ public class CardServiceTest {
 
 	@Test
 	public void closeCard() {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
-		ListOperations listOperations = trello.boundListOperations(LIST_ID);
+		ListOperations listOperations = trello.boundListOperations(getTestListId());
 		Card card = listOperations.createCard("CardServiceTest_closeCard", "", "", "", "", "", "", "");
 
 		CardOperations cardOperations = trello.boundCardOperations(card.getId());
@@ -223,7 +216,7 @@ public class CardServiceTest {
 
 	@Test
 	public void deleteCard() {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String idList = "4f82ed4f1903bae43e66f5fd";
@@ -238,7 +231,7 @@ public class CardServiceTest {
 
 	@Test
 	public void deleteChecklistFromCard() {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
@@ -253,7 +246,7 @@ public class CardServiceTest {
 
 	@Test
 	public void deleteLabelFromCard() {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
@@ -272,7 +265,7 @@ public class CardServiceTest {
 
 	@Test
 	public void deleteMemberFromCard() throws IOException {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
@@ -297,7 +290,7 @@ public class CardServiceTest {
 
 	@Test
 	public void testDeleteMemberVoteFromCard() throws IOException {
-		TrelloTemplate trello = new TrelloTemplate(API_KEY, API_TOKEN);
+		TrelloTemplate trello = getTrelloTemplate();
 
 		// GIVEN
 		String cardId = "50429779e215b4e45d7aef24";
