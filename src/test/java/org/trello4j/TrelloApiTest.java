@@ -22,6 +22,10 @@ public class TrelloApiTest {
         return System.getenv("TRELLO_API_TOKEN");
     }
 
+    protected String getTestBoardId() {
+        return System.getenv("TRELLO_BOARD_ID");
+    }
+
     protected String getTestListId() {
         return System.getenv("TRELLO_LIST_ID");
     }
