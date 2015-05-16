@@ -235,4 +235,4 @@ don't want our tests to litter your Trello account). To get list identifier, vis
 `https://api.trello.com/1/boards/{your_board_id}/lists?key={your_API_key}&token={tour_API_token}`.
 
 Set the environment variables `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, `TRELLO_BOARD_ID` and `TRELLO_LIST_ID` to that
-values and you're ready to execute `mvn test`.
+values and also `TRELLO_USER_NAME` to your user name and you're ready to execute `mvn test`.

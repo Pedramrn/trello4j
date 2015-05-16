@@ -14,6 +14,10 @@ public class TrelloApiTest {
         return new TrelloTemplate(getApiKey(), getApiToken());
     }
 
+    protected String getTrelloUserName() {
+        return System.getenv("TRELLO_USER_NAME");
+    }
+
     protected String getApiKey() {
         return System.getenv("TRELLO_API_KEY");
     }
