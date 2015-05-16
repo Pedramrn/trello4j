@@ -1,19 +1,5 @@
 package org.trello4j;
 
-import static junit.framework.Assert.assertTrue;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.trello4j.core.CardOperations;
 import org.trello4j.core.ListOperations;
@@ -23,6 +9,16 @@ import org.trello4j.model.Card;
 import org.trello4j.model.Checklist;
 import org.trello4j.model.Member;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
+import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.*;
+
 /**
  * @author Johan Mynhardt
  */
@@ -31,15 +27,19 @@ public class CardServiceTest extends TrelloApiTest {
 	@Test
 	public void testCreateCard() {
 		// GIVEN
-		String listId = "4f82ed4f1903bae43e66f5fd";
 		String name = "Trello4J CardService: Add Card using POST";
 		String description = "Something awesome happened :)";
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("desc", description);
-
 		// WHEN
-		Card card = getTrelloTemplate().boundListOperations(listId).createCard(name, description, null, null, null, null, null, null);
+		Card card = getTrelloTemplate().boundListOperations(getTestListId()).createCard(
+                name,
+                description,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
 
 		// THEN
 		assertNotNull(card);
