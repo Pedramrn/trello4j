@@ -1,4 +1,6 @@
-## Introduction
+[![Build Status](https://travis-ci.org/ForNeVeR/trello4j.svg?branch=develop)](https://travis-ci.org/ForNeVeR/trello4j)
+
+## Introduction 
 **trello4j** is a java wrapper around [Trello API](https://trello.com/docs/api/index.html).
 
 You need to get a API key and optionally generate a token [here](https://trello.com/1/appKey/generate) to be able to use Trello's API.
