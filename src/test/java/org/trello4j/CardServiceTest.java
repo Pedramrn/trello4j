@@ -30,21 +30,18 @@ public class CardServiceTest extends TrelloApiTest {
 		String name = "Trello4J CardService: Add Card using POST";
 		String description = "Something awesome happened :)";
 
-		// WHEN
-		Card card = getTrelloTemplate().boundListOperations(getTestListId()).createCard(
-                name,
-                description,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+        ListOperations list = getTrelloTemplate().boundListOperations(getTestListId());
 
-		// THEN
-		assertNotNull(card);
-		assertThat(card.getName(), equalTo(name));
-		assertThat(card.getDesc(), equalTo(description));
+        // WHEN
+		Card card = list.createCard(name, description, null, null, null, null, null, null);
+        try {
+            // THEN
+            assertNotNull(card);
+            assertThat(card.getName(), equalTo(name));
+            assertThat(card.getDesc(), equalTo(description));
+        } finally {
+            getTrelloTemplate().boundCardOperations(card.getId()).delete();
+        }
 	}
 
 	@Test
