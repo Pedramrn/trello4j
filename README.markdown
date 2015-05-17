@@ -236,3 +236,18 @@ don't want our tests to litter your Trello account). To get list identifier, vis
 
 Set the environment variables `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, `TRELLO_BOARD_ID` and `TRELLO_LIST_ID` to that
 values and also `TRELLO_USER_NAME` to your user name and you're ready to execute `mvn test`.
+
+## Release management
+
+If you want to publish the artifact to your bintray account as discussed
+[here](http://veithen.github.io/2013/05/26/github-bintray-maven-release-plugin.html), do the following:
+
+1. Make sure you've set all the settings to `~/.m2/settings.xml`.
+2. Change `pom.xml` accordingly.
+3. Check package with `$ mvn -Prelease clean install` (pass `-DskipTests=true` if you want to).
+4. Execute the following:
+
+   ```
+$ mvn release:prepare
+$ mvn release:perform
+   ```
