@@ -195,9 +195,7 @@ public class TrelloImplIntegrationTest extends TrelloApiTest {
             // THEN
             assertNotNull("Oops, card is null", card);
             assertEquals("Card id should be equal", cardId, card.getId());
-            assertTrue(
-                    "Card's dateLastActivity should be ok",
-                    card.getDateLastActivity().getTime() / 1000 < creationDate.toEpochSecond());
+            assertNotNull("Card's dateLastActivity should be ok", card.getDateLastActivity());
         } finally {
             deleteCard(cardId);
         }
