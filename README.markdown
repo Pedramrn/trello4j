@@ -12,29 +12,28 @@ Please report any issues and/or participate in the development [here](https://tr
 ### Get trello4j from unofficial maven repo
 
     <repository>
-	    <id>joelso-mvn-repo</id>
-	    <name>joelso github mvn repo</name>
-	    <url>https://raw.github.com/joelso/joelso-mvn-repo/master/snapshots/</url>
+        <id>bintray-fornever-maven</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/fornever/maven</url>
 	</repository>
 	
 	...
 	
 	<dependency>
-	    <groupId>org.trello4j</groupId>
+	    <groupId>me.fornever</groupId>
 		<artifactId>trello4j</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</dependency>
-	
+		<version>1.0.0</version>
+	</dependency>	
 
 ### Get source and build it
 
-    git clone git@github.com:joelso/trello4j.git
+    git clone https://github.com/ForNeVeR/trello4j.git
 	cd trello4j
 	mvn install
 
 Now you got two options:
 
-1. Use trello4j from your local maven repo, add dependency groupId: org.trello4j / artifactId: trello4j
+1. Use trello4j from your local maven repo, add dependency groupId: me.fornever / artifactId: trello4j
 2. Use jar that was built in directory **target/**
 
 ## Usage
@@ -244,10 +243,6 @@ If you want to publish the artifact to your bintray account as discussed
 
 1. Make sure you've set all the settings to `~/.m2/settings.xml`.
 2. Change `pom.xml` accordingly.
-3. Check package with `$ mvn -Prelease clean install` (pass `-DskipTests=true` if you want to).
-4. Execute the following:
-
-   ```
-$ mvn release:prepare
-$ mvn release:perform
-   ```
+3. Generate artifacts with `$mvn -Prelease clean package -DskipTests=true`.
+4. Copy `pom.xml` with the name of `trello4j-<version>.pom` and upload it to repository.
+5. Upload binary artifacts to bintray or to another repository.
