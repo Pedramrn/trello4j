@@ -89,7 +89,7 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 	public Action comment(String text, String... filters) {
 		Map<String, String> keyValueMap = Collections.singletonMap("text", text);
 		TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.CARD_POST_COMMENTS, cardId).filter(filters);
-		return getTrelloAccessor().doPut(uri.build(), keyValueMap, Action.class);
+		return getTrelloAccessor().doPost(uri.build(), keyValueMap, Action.class);
 	}
 
 	@Override

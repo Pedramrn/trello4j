@@ -46,7 +46,6 @@ public class CardServiceTest extends TrelloApiTest {
 	}
 
 	@Test
-    @Ignore
 	public void testCommentOnCard() {
 		// GIVEN
         String cardId = createCard("CardServiceTest_testCommentOnCard");
