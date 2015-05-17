@@ -1,6 +1,7 @@
 package org.trello4j.core;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface CardOperations {
 
 	Action comment(String text, String... filter);
 
-	List<Attachment> attach(File file, URL attachmentUrl, String name, String mimeType, String... filter);
+	Attachment attach(File file, URL attachmentUrl, String name, String mimeType, String... filter) throws IOException;
 
 	Checklist addChecklist(String idChecklist, String checklistName, String idChecklistSource, String... filter);
 

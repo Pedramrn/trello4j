@@ -218,3 +218,21 @@ Now you got two options:
 
 [skydjol](https://github.com/skydjol)
 [ForNeVeR](https://github.com/ForNeVeR)
+
+## Test environment
+
+To execute the tests, you should register on Trello if you still haven't done so. After that get the API key using link
+https://trello.com/1/appKey/generate. Copy only the `key` field from that page - that's your API key. After that you
+should get access token for running the tests. Prepare and visit the link
+`https://trello.com/1/authorize?key={your_API_key}&name=trello4j&expiration=never&response_type=token&scope=read,write`.
+
+Now you want to know identifier of your test board. Visit the page
+`https://api.trello.com/1/members/{your_user_name}/boards?key={your_API_key}&token={tour_API_token}` and get the
+identifier from there.
+
+Some tests also will use the list and you need to create it manually (because lists cannot be permanently deleted and we
+don't want our tests to litter your Trello account). To get list identifier, visit
+`https://api.trello.com/1/boards/{your_board_id}/lists?key={your_API_key}&token={tour_API_token}`.
+
+Set the environment variables `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, `TRELLO_BOARD_ID` and `TRELLO_LIST_ID` to that
+values and also `TRELLO_USER_NAME` to your user name and you're ready to execute `mvn test`.

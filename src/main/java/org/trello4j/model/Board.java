@@ -102,6 +102,10 @@ public class Board extends TrelloObject {
 		private String orange;
 		private String green;
 		private String blue;
+        private String sky;
+        private String lime;
+        private String pink;
+        private String black;
 
 		public String getYellow() {
 			return yellow;
@@ -151,7 +155,38 @@ public class Board extends TrelloObject {
 			this.blue = blue;
 		}
 
-	}
+        public String getSky() {
+            return sky;
+        }
+
+        public void setSky(String sky) {
+            this.sky = sky;
+        }
+
+        public String getLime() {
+            return lime;
+        }
+
+        public void setLime(String lime) {
+            this.lime = lime;
+        }
+
+        public String getPink() {
+            return pink;
+        }
+
+        public void setPink(String pink) {
+            this.pink = pink;
+        }
+
+        public String getBlack() {
+            return black;
+        }
+
+        public void setBlack(String black) {
+            this.black = black;
+        }
+    }
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public class Prefs {
