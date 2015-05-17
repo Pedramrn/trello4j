@@ -345,14 +345,4 @@ public class CardServiceTest extends TrelloApiTest {
             deleteCard(cardId);
         }
 	}
-
-    private String createCard(String name) {
-        Card card = getTrelloTemplate().boundListOperations(getTestListId())
-                .createCard(name, "", "", "", "", "", "", "");
-        return card.getId();
-    }
-
-    private boolean deleteCard(String id) {
-        return getTrelloTemplate().boundCardOperations(id).delete();
-    }
 }

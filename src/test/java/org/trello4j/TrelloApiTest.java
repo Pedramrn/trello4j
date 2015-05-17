@@ -1,6 +1,7 @@
 package org.trello4j;
 
 import org.trello4j.core.TrelloTemplate;
+import org.trello4j.model.Card;
 
 /**
  * Base class for unit tests.
@@ -32,5 +33,15 @@ public class TrelloApiTest {
 
     protected String getTestListId() {
         return System.getenv("TRELLO_LIST_ID");
+    }
+
+    protected String createCard(String name) {
+        Card card = getTrelloTemplate().boundListOperations(getTestListId())
+                .createCard(name, "", "", "", "", "", "", "");
+        return card.getId();
+    }
+
+    protected boolean deleteCard(String id) {
+        return getTrelloTemplate().boundCardOperations(id).delete();
     }
 }
