@@ -36,9 +36,9 @@ public class DefaultListOperations extends AbstractOperations implements ListOpe
 	 * @param pos
 	 *            (optional - Default: bottom; Valid Values: A position. top,
 	 *            bottom, or a positive number.)
-	 * @param label
+	 * @param labels
 	 *            (optional - Valid Values: Green, yellow, orange, red, purple)
-	 * @param cardSource
+	 * @param cardSourceId
 	 *            (optional - Valid Values: The id of the card to copy into a
 	 *            new card.)
 	 * @param memberId
@@ -47,7 +47,6 @@ public class DefaultListOperations extends AbstractOperations implements ListOpe
 	 * @param keepFromSource
 	 *            (optional - Default: all; Valid Values: Properties of the card
 	 *            to copy over from the source.)
-	 * @return
 	 */
 	@Override
 	public Card createCard(String name, String desc, String due, String pos, String labels, String memberId, String cardSourceId, String keepFromSource) {
