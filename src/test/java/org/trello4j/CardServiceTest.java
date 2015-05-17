@@ -73,28 +73,23 @@ public class CardServiceTest extends TrelloApiTest {
         try {
             String fileContents = "foo bar text in file\n";
             File file = File.createTempFile("trello_attach_test", ".junit");
-            if (!file.exists()) {
-                try {
-                    FileWriter fileWriter = new FileWriter(file);
-                    fileWriter.write(fileContents);
-                    fileWriter.flush();
-                    fileWriter.close();
-                } catch (IOException e) {
-                    fail(e.toString());
-                }
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(fileContents);
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                fail(e.toString());
             }
 
             long size = file.length();
             String fileName = file.getName();
 
             // WHEN
-            List<Card.Attachment> attachments = getTrelloTemplate().boundCardOperations(cardId).attach(file, null, null, null);
+            Card.Attachment attachment = getTrelloTemplate().boundCardOperations(cardId).attach(file, null, null, null);
             file.deleteOnExit();
 
             // THEN
-            assertNotNull(attachments);
-            Card.Attachment attachment = attachments.get(attachments.size() - 1);
-
             assertThat(attachment.getName(), equalTo(fileName));
             assertThat(attachment.getBytes(), equalTo("" + size));
         } finally {
@@ -110,11 +105,9 @@ public class CardServiceTest extends TrelloApiTest {
 
         try {
             // WHEN
-            List<Card.Attachment> attachments = getTrelloTemplate().boundCardOperations(cardId).attach(null, url, "Taco", null);
+            Card.Attachment attachment = getTrelloTemplate().boundCardOperations(cardId).attach(null, url, "Taco", null);
 
             // THEN
-            assertNotNull(attachments);
-            Card.Attachment attachment = attachments.get(attachments.size() - 1);
             assertNotNull(attachment);
             assertThat(attachment.getName(), equalTo("Taco"));
             assertTrue(attachment.getUrl().startsWith("http"));

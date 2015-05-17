@@ -66,7 +66,9 @@ class TrelloAccessor {
 
 	<T> T doPost(String uri, Map<String, ?> data, ParameterizedTypeReference<T> typeReference) {
 		try {
-			return restTemplate.exchange(uri, HttpMethod.POST, HttpEntity.EMPTY, typeReference, data).getBody();
+			return restTemplate
+                    .exchange(buildUri(uri, data), HttpMethod.POST, HttpEntity.EMPTY, typeReference)
+                    .getBody();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
