@@ -1,6 +1,7 @@
 package org.trello4j.core;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -14,8 +15,6 @@ import org.trello4j.model.Member;
 
 /**
  * The Interface CardService.
- * 
- * @author
  */
 public interface CardOperations {
 
@@ -37,7 +36,7 @@ public interface CardOperations {
 
 	Action comment(String text, String... filter);
 
-	List<Attachment> attach(File file, URL attachmentUrl, String name, String mimeType, String... filter);
+	Attachment attach(File file, URL attachmentUrl, String name, String mimeType, String... filter) throws IOException;
 
 	Checklist addChecklist(String idChecklist, String checklistName, String idChecklistSource, String... filter);
 
@@ -48,6 +47,13 @@ public interface CardOperations {
 	boolean vote(String memberId, String... filter);
 
 	List<Member> getMemberVotes(String... filter);
+
+	/**
+	 * Archives the card.
+	 * @param value true to archive, false to remove from archive.
+	 * @return true if action was successful.
+	 */
+	boolean setClosed(boolean value);
 
 	boolean delete(String... filter);
 

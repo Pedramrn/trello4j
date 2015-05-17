@@ -6,9 +6,9 @@ import java.util.Date;
 
 /**
  * Model that represents a user action @ Trello.
- * <p/>
+ * <p>
  * Example json:
- * <p/>
+ * <p>
  * <code>
  * {
  * "id":"4f7f3809301cb98a5346bb50",

@@ -1,23 +1,21 @@
 package org.trello4j.core;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.trello4j.TrelloURI;
+import org.trello4j.model.*;
+import org.trello4j.model.Card.Attachment;
+import org.trello4j.model.Card.Label;
+import org.trello4j.model.Checklist.CheckItem;
+
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.io.FileSystemResource;
-import org.trello4j.TrelloURI;
-import org.trello4j.model.Action;
-import org.trello4j.model.Board;
-import org.trello4j.model.Card;
-import org.trello4j.model.Card.Attachment;
-import org.trello4j.model.Card.Label;
-import org.trello4j.model.Checklist;
-import org.trello4j.model.Checklist.CheckItem;
-import org.trello4j.model.Member;
 
 public class DefaultCardOperations extends AbstractOperations implements CardOperations {
 
@@ -91,14 +89,20 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 	public Action comment(String text, String... filters) {
 		Map<String, String> keyValueMap = Collections.singletonMap("text", text);
 		TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.CARD_POST_COMMENTS, cardId).filter(filters);
-		return getTrelloAccessor().doPut(uri.build(), keyValueMap, Action.class);
+		return getTrelloAccessor().doPost(uri.build(), keyValueMap, Action.class);
 	}
 
 	@Override
-	public List<Attachment> attach(File file, URL attachmentUrl, String name, String mimeType, String... filters) {
+	public Attachment attach(File file, URL attachmentUrl, String name, String mimeType, String... filters)
+            throws IOException {
 		Map<String, Object> keyValueMap = new HashMap<String, Object>();
-		if (file != null)
-			keyValueMap.put("file", new FileSystemResource(file));
+		if (file != null) {
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            String content = new String(bytes, Charset.forName("UTF-8"));
+            keyValueMap.put("file", content);
+            keyValueMap.put("name", file.getName());
+        }
+
 		if (attachmentUrl != null)
 			keyValueMap.put("url", attachmentUrl.toString());
 		if (name != null)
@@ -107,7 +111,7 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 			keyValueMap.put("mimeType", mimeType);
 
 		TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.CARD_POST_ATTACHMENTS, cardId).filter(filters);
-		ParameterizedTypeReference<List<Attachment>> typeReference = new ParameterizedTypeReference<List<Attachment>>() {
+		ParameterizedTypeReference<Attachment> typeReference = new ParameterizedTypeReference<Attachment>() {
 		};
 		return getTrelloAccessor().doPost(uri.build(), keyValueMap, typeReference);
 	}
@@ -162,6 +166,13 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 		ParameterizedTypeReference<List<Member>> typeReference = new ParameterizedTypeReference<List<Member>>() {
 		};
 		return getTrelloAccessor().doGet(uri.build(), typeReference);
+	}
+
+	@Override
+	public boolean setClosed(boolean value) {
+		Map<String, Boolean> arguments = Collections.singletonMap("value", value);
+		TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.CARD_CLOSE_CARD, cardId);
+		return getTrelloAccessor().doPut(uri.build(), arguments);
 	}
 
 	@Override
