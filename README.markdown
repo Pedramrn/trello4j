@@ -12,29 +12,28 @@ Please report any issues and/or participate in the development [here](https://tr
 ### Get trello4j from unofficial maven repo
 
     <repository>
-	    <id>joelso-mvn-repo</id>
-	    <name>joelso github mvn repo</name>
-	    <url>https://raw.github.com/joelso/joelso-mvn-repo/master/snapshots/</url>
+        <id>bintray-fornever-maven</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/fornever/maven</url>
 	</repository>
 	
 	...
 	
 	<dependency>
-	    <groupId>org.trello4j</groupId>
+	    <groupId>me.fornever</groupId>
 		<artifactId>trello4j</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</dependency>
-	
+		<version>1.0.0</version>
+	</dependency>	
 
 ### Get source and build it
 
-    git clone git@github.com:joelso/trello4j.git
+    git clone https://github.com/ForNeVeR/trello4j.git
 	cd trello4j
 	mvn install
 
 Now you got two options:
 
-1. Use trello4j from your local maven repo, add dependency groupId: org.trello4j / artifactId: trello4j
+1. Use trello4j from your local maven repo, add dependency groupId: me.fornever / artifactId: trello4j
 2. Use jar that was built in directory **target/**
 
 ## Usage
@@ -236,3 +235,14 @@ don't want our tests to litter your Trello account). To get list identifier, vis
 
 Set the environment variables `TRELLO_API_KEY`, `TRELLO_API_TOKEN`, `TRELLO_BOARD_ID` and `TRELLO_LIST_ID` to that
 values and also `TRELLO_USER_NAME` to your user name and you're ready to execute `mvn test`.
+
+## Release management
+
+If you want to publish the artifact to your bintray account as discussed
+[here](http://veithen.github.io/2013/05/26/github-bintray-maven-release-plugin.html), do the following:
+
+1. Make sure you've set all the settings to `~/.m2/settings.xml`.
+2. Change `pom.xml` accordingly.
+3. Generate artifacts with `$mvn -Prelease clean package -DskipTests=true`.
+4. Copy `pom.xml` with the name of `trello4j-<version>.pom` and upload it to repository.
+5. Upload binary artifacts to bintray or to another repository.

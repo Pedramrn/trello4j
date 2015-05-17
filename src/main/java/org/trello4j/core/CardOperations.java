@@ -15,8 +15,6 @@ import org.trello4j.model.Member;
 
 /**
  * The Interface CardService.
- * 
- * @author
  */
 public interface CardOperations {
 
