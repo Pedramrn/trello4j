@@ -9,9 +9,9 @@ import org.trello4j.model.Checklist.CheckItem;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -95,9 +95,11 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 	@Override
 	public Attachment attach(File file, URL attachmentUrl, String name, String mimeType, String... filters)
             throws IOException {
-		Map<String, Object> keyValueMap = new HashMap<String, Object>();
+		Map<String, Object> keyValueMap = new HashMap<>();
 		if (file != null) {
-            byte[] bytes = Files.readAllBytes(file.toPath());
+            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+            byte[] bytes = new byte[(int) randomAccessFile.length()];
+            randomAccessFile.read(bytes);
             String content = new String(bytes, Charset.forName("UTF-8"));
             keyValueMap.put("file", content);
             keyValueMap.put("name", file.getName());
@@ -122,7 +124,7 @@ public class DefaultCardOperations extends AbstractOperations implements CardOpe
 			validateObjectId(checklistId);
 		}
 
-		Map<String, Object> keyValueMap = new HashMap<String, Object>();
+		Map<String, Object> keyValueMap = new HashMap<>();
 		keyValueMap.put("name", checklistName == null ? "Checklist" : checklistName);
 		if (checklistId != null) {
 			keyValueMap.put("value", checklistId);
