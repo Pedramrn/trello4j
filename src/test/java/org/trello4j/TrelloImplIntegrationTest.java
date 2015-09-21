@@ -187,7 +187,6 @@ public class TrelloImplIntegrationTest extends TrelloApiTest {
 	public void shouldReturnCard() {
 		// GIVEN
 		String cardId = createCard("TrelloImplIntegrationTest_shouldReturnCard");
-        ZonedDateTime creationDate = ZonedDateTime.now(ZoneOffset.UTC);
         try {
             // WHEN
             Card card = getTrelloTemplate().boundCardOperations(cardId).get();
