@@ -30,87 +30,44 @@ class TrelloAccessor {
 	}
 
 	<T> T doGet(String uri, Class<T> responseType) {
-		try {
 			return restTemplate.exchange(uri, HttpMethod.GET, HttpEntity.EMPTY, responseType).getBody();
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	<T> T doGet(String uri, ParameterizedTypeReference<T> typeReference) {
-		try {
 			return restTemplate.exchange(uri, HttpMethod.GET, HttpEntity.EMPTY, typeReference).getBody();
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	boolean doPost(String uri, Map<String, ?> data) {
-		try {
 			restTemplate.exchange(buildUri(uri, data), HttpMethod.POST, HttpEntity.EMPTY, Object.class).getBody();
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	<T> T doPost(String uri, Map<String, ?> data, Class<T> responseType) {
-		try {
 			return restTemplate.exchange(buildUri(uri, data), HttpMethod.POST, HttpEntity.EMPTY, responseType).getBody();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	<T> T doPost(String uri, Map<String, ?> data, ParameterizedTypeReference<T> typeReference) {
-		try {
 			return restTemplate
                     .exchange(buildUri(uri, data), HttpMethod.POST, HttpEntity.EMPTY, typeReference)
                     .getBody();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	boolean doPut(String uri, Map<String, ?> data) {
-		try {
 			restTemplate.exchange(buildUri(uri, data), HttpMethod.PUT, HttpEntity.EMPTY, Object.class).getBody();
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	<T> T doPut(String uri, Map<String, ?> data, Class<T> responseType) {
-		try {
 			return restTemplate.exchange(buildUri(uri, data), HttpMethod.PUT, HttpEntity.EMPTY, responseType).getBody();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	<T> T doPut(String uri, Map<String, ?> data, ParameterizedTypeReference<T> typeReference) {
-		try {
 			return restTemplate.exchange(buildUri(uri, data), HttpMethod.PUT, HttpEntity.EMPTY, typeReference).getBody();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	boolean doDelete(String uri) {
-		try {
 			restTemplate.delete(uri);
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	public TrelloURI createTrelloUri(String uriTemplate, String... resources) {
