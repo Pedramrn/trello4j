@@ -1,5 +1,31 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'trello-api-wrapper'
+
+    publishedGroupId = 'com.6thsolution'
+    libraryName = 'TrelloAPIWrapper'
+    artifact = 'trello-api-wrapper'
+
+    libraryDescription = 'A wrapper around the Trello APIs, specific for android.'
+
+    siteUrl = 'https://github.com/Pedramrn/trello4j'
+    gitUrl = 'https://github.com/Pedramrn/trello4j.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'pedramrn'
+    developerName = 'MohammadReza Nasirloo'
+    developerEmail = 'MohammadReza.Nasirloo@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+//apply from: "https://raw.githubusercontent.com/Pedramrn/bintray/master/bintray.gradle"
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -17,7 +43,7 @@ android {
         }
     }
 
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
