@@ -105,4 +105,18 @@ public class DefaultBoardOperations extends AbstractOperations implements BoardO
         TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.BOARD_URL, "");
         return getTrelloAccessor().doPost(uri.build(), keyValueMap, Board.class);
     }
+
+    @Override
+    public org.trello4j.model.List createList(String name, String pos) {
+        validateNotNull(name);
+
+        Map<String, Object> keyValueMap = new HashMap<>();
+        keyValueMap.put("name", name);
+        if (pos != null) {
+            keyValueMap.put("desc", pos);
+        }
+
+        TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.BOARD_LISTS_URL, boardId);
+        return getTrelloAccessor().doPost(uri.build(), keyValueMap, org.trello4j.model.List.class);
+    }
 }

@@ -39,10 +39,21 @@ public interface BoardOperations {
      * Refer to <a href="http://developers.trello.com/advanced-reference/board#post-1-boards">create
      * board api</a> for more information.
      *
-     * @param name a name for the board to create
-     * @param desc board's description
+     * @param name A name for the board to create.
+     * @param desc board's description.
      * @return the created board.
      */
     Board createBoard(String name, String desc);
+
+    /**
+     * <p>Creates a new List with POST method</p>
+     * Refer to <a href="http://developers.trello.com/advanced-reference/board#post-1-boards-board-id-lists">create
+     * list api</a> for more information.
+     *
+     * @param name A name for the list to create.
+     * @param pos A position. top, bottom, or a positive number.
+     * @return the created list.
+     */
+    org.trello4j.model.List createList(String name, String pos);
 
 }
