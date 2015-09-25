@@ -120,6 +120,12 @@ public class Card extends TrelloObject {
 		this.labels = labels;
 	}
 
+    @Override
+    public String toString() {
+        return "id: " + getId() + "\n" + "boardId: " + getIdBoard() + "\n" +
+                "cardName: " + getName() + "\n" + "cardDesc: " + getDesc();
+    }
+
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class Attachment {
 

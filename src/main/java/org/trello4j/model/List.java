@@ -18,7 +18,7 @@ public class List extends TrelloObject {
 
 	private String name;
 	private boolean closed;
-	private String boardId;
+	private String idBoard;
 	private double pos;
 	private boolean subscribed;
 
@@ -38,12 +38,12 @@ public class List extends TrelloObject {
 		this.closed = closed;
 	}
 
-	public String getBoardId() {
-		return boardId;
+	public String getIdBoard() {
+		return idBoard;
 	}
 
-	public void setBoardId(String boardId) {
-		this.boardId = boardId;
+	public void setIdBoard(String idBoard) {
+		this.idBoard = idBoard;
 	}
 
 	public double getPos() {
@@ -61,4 +61,9 @@ public class List extends TrelloObject {
 	public void setSubscribed(boolean subscribed) {
 		this.subscribed = subscribed;
 	}
+
+    @Override
+    public String toString() {
+        return "id: " + getId() + "\n" + "boardId: " + getIdBoard() + "\n" + "listName: " + getName();
+    }
 }

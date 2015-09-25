@@ -94,7 +94,12 @@ public class Board extends TrelloObject {
 		this.invited = invited;
 	}
 
-	public class LabelNames {
+    @Override
+    public String toString() {
+        return "id: " + getId() + "\n" + "boardName: " + getName();
+    }
+
+    public class LabelNames {
 
 		private String yellow;
 		private String red;
