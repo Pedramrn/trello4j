@@ -34,4 +34,15 @@ public interface BoardOperations {
 
 	Prefs getPrefs();
 
+    /**
+     * <p>Creates a new board with POST method</p>
+     * Refer to <a href="http://developers.trello.com/advanced-reference/board#post-1-boards">create
+     * board api</a> for more information.
+     *
+     * @param name a name for the board to create
+     * @param desc board's description
+     * @return the created board.
+     */
+    Board createBoard(String name, String desc);
+
 }

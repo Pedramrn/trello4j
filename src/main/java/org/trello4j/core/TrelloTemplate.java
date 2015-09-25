@@ -44,6 +44,11 @@ public class TrelloTemplate extends TrelloAccessor implements TrelloOperations {
 		return new DefaultBoardOperations(boardId, this);
 	}
 
+    @Override
+    public BoardOperations boundBoardOperations() {
+        return new DefaultBoardOperations(null, this);
+    }
+
 	@Override
 	public NotificationOperations boundNotificationOperations(String notificationId) {
 		return new DefaultNotificationOperations(notificationId, this);

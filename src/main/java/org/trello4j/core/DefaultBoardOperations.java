@@ -1,7 +1,9 @@
 package org.trello4j.core;
 
+import java.util.HashMap;
 import java.util.List;
 
+import java.util.Map;
 import org.springframework.core.ParameterizedTypeReference;
 import org.trello4j.TrelloURI;
 import org.trello4j.model.Action;
@@ -18,7 +20,9 @@ public class DefaultBoardOperations extends AbstractOperations implements BoardO
 
 	DefaultBoardOperations(String boardId, TrelloAccessor trelloAccessor) {
 		super(trelloAccessor);
-		validateObjectId(boardId);
+        if (boardId != null){
+            validateObjectId(boardId);
+        }
 		this.boardId = boardId;
 	}
 
@@ -88,4 +92,17 @@ public class DefaultBoardOperations extends AbstractOperations implements BoardO
 		return getTrelloAccessor().doGet(uri.build(), Organization.class);
 	}
 
+    @Override
+    public Board createBoard(String name, String desc) {
+        validateNotNull(name);
+
+        Map<String, Object> keyValueMap = new HashMap<>();
+        keyValueMap.put("name", name);
+        if (desc != null) {
+            keyValueMap.put("desc", desc);
+        }
+
+        TrelloURI uri = getTrelloAccessor().createTrelloUri(TrelloURI.BOARD_URL, "");
+        return getTrelloAccessor().doPost(uri.build(), keyValueMap, Board.class);
+    }
 }
