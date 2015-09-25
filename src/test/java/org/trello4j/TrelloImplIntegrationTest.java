@@ -6,10 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -17,7 +13,6 @@ import org.junit.Test;
 import org.trello4j.core.TrelloTemplate;
 import org.trello4j.model.Action;
 import org.trello4j.model.Board;
-import org.trello4j.model.Board.PERMISSION_TYPE;
 import org.trello4j.model.Card;
 import org.trello4j.model.Checklist;
 import org.trello4j.model.Member;
