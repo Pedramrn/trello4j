@@ -59,9 +59,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'//Note: after okHttp 2.3.0, you cannot send a POST request without a body which causes an exception "method POST must have a request body."
     compile 'com.fasterxml.jackson.core:jackson-core:2.4.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
-    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M2'//Note: 2.0.0.M3 is not compatible with okHttp higher than 2.3.0 version issue link: https://github.com/spring-projects/spring-android/issues/25
     testCompile 'junit:junit:4.12'
 }
