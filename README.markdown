@@ -85,9 +85,9 @@ Now you got two options:
 <tr><td>PUT /1/boards/[board_id]/closed                </td><td>IMPLEMENTED</td></tr>
 <tr><td>PUT /1/boards/[board_id]/desc                  </td><td>TODO</td></tr>
 <tr><td>PUT /1/boards/[board_id]/name                  </td><td>TODO</td></tr>
-<tr><td>POST /1/boards                                 </td><td>TODO</td></tr>
+<tr><td>POST /1/boards                                 </td><td>IMPLEMENTED</td></tr>
 <tr><td>POST /1/boards/[board_id]/checklists           </td><td>TODO</td></tr>
-<tr><td>POST /1/boards/[board_id]/lists                </td><td>TODO</td></tr>
+<tr><td>POST /1/boards/[board_id]/lists                </td><td>IMPLEMENTED</td></tr>
 <tr><td>POST /1/boards/[board_id]/myPrefs              </td><td>TODO</td></tr>
 
 <tr><th colspan="2">Cards</th></tr>
